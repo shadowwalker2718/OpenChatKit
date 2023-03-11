@@ -23,8 +23,6 @@ process = subprocess.run(
 
 for f in glob.glob(f"{DIR}/files/*.gz"):
     out_path, _ = os.path.splitext(f)
-    with (
-        gzip.open(f, 'rb') as infile, 
-        open(out_path, 'wb') as outfile
-    ):
-        shutil.copyfileobj(infile, outfile)
+    with gzip.open(f, 'rb') as infile:
+        with open(out_path, 'wb') as outfile:
+            shutil.copyfileobj(infile, outfile)
